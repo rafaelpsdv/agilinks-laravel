@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\LinkController;
 use Illuminate\Support\Facades\Route;
 
@@ -8,6 +9,8 @@ Route::get('/', function () {
 });
 
 Route::resource('links', LinkController::class);
+
+Route::resource('collections', CollectionController::class);
 
 // Route::get('links', [LinkController::class, 'index'])->name('links.index');
 // Route::get('links/create', [LinkController::class, 'create'])->name('links.create');
