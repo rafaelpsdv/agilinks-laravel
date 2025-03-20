@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Collection;
 use App\Models\Link;
 use Illuminate\Http\Request;
 
@@ -22,7 +23,9 @@ class LinkController extends Controller
      */
     public function create()
     {
-        return view('links.create');
+        $collections = Collection::all();
+        
+        return view('links.create', compact('collections'));
     }
 
     /**

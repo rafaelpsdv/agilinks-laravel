@@ -16,7 +16,7 @@
     <header class="ui menu">
         <a href="" class="header item">Agilinks</a>
         <a href="{{ route('links.index')}}" class="item">Links</a>
-        <a href="#" class="item">Collections</a>
+        <a href="{{ route('collections.index')  }}" class="item">Collections</a>
     </header>
 
     <div class="ui hidden section divider"></div>
