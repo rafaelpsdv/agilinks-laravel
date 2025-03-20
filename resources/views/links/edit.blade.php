@@ -28,10 +28,28 @@
                     <span class="ui red text">{{ $message }}</span>
                 @enderror
             </div>
+
+        <div class="field">
+            <label for="collection_id" >Coleção</label>
+            <select name="collection_id" id="collection_id" class="ui selection clearable dropdown">
+                <option value="" >Selecione uma Coleção</option>
+
+                @foreach ($collections as $collection)
+                    <option value="{{ $collection->id  }}" @selected($collection == $link->collection)>
+                        {{ $collection->name  }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
             <button type="submit" class="ui primary button">
                 Atualizar 
             </button>
         </form>
     </div>
 
+@endsection
+
+@section('scripts')
+    $('.ui.dropdown').dropdown();
 @endsection

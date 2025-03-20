@@ -37,9 +37,12 @@ class LinkController extends Controller
             'title' => 'required',
             'description' => 'required',
             'url' => 'required',
+            'collection_id' => ['integer', 'nullable'],
         ]);
 
-        Link::create($validated);
+        $collection = Collection::findOrFail($request->collection_id);
+        $link = Link::create($validated);
+        $link->collection()->associate($collection)->save();
 
         return redirect()->route('links.index');
     }
@@ -59,7 +62,10 @@ class LinkController extends Controller
     {
         // $link = Link::findOrFail($id);
         // dd($link);
-        return view('links.edit', compact('link'));
+
+        $collections = Collection::all();
+
+        return view('links.edit', compact('link', 'collections'));
     }
 
     /**
@@ -71,9 +77,13 @@ class LinkController extends Controller
             'title' => 'required',
             'description' => 'required',
             'url' => 'required',
+            'collection_id' => ['integer', 'nullable'],
         ]);
 
         $link->update($validated);
+
+        $collection = Collection::findOrFail($request->collection_id);
+        $link->collection()->associate($collection)->save();
 
         return redirect()->route('links.index');
     }

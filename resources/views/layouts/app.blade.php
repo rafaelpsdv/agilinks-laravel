@@ -21,6 +21,10 @@
 
     <div class="ui hidden section divider"></div>
 
-   @yield('main') 
+   @yield('main')
+
+    <script>
+        @yield('scripts')
+    </script>
 </body>
 </html>
