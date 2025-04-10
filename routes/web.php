@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return redirect()->route('links.index');
-});
+})->name('home');
 
 Route::resource('links', LinkController::class);
 Route::resource('collections', CollectionController::class);
