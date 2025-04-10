@@ -4,7 +4,7 @@
     <label for="{{ $name  }}">{{ $label }}</label>
     <input type="{{ $type }}" name="{{ $name }}" id="{{ $name }}">
 
-    @error('{{ $name }}')
+    @error($name)
         <span class='ui red text'>{{ $message }}</span>
         
     @enderror
