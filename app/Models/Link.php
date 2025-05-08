@@ -20,5 +20,10 @@ class Link extends Model
     {
         return $this->belongsTo(Collection::class);
     }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }
 
