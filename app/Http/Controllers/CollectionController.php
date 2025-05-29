@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CollectionController extends Controller
 {
@@ -12,7 +13,8 @@ class CollectionController extends Controller
      */
     public function index()
     {
-        $collections = Collection::with(['links'])->get();
+        $collections = Auth::user()->collections()->with(['links'])->get();
+        //$collections = Collection::with(['links'])->get();
 
         return view('collections.index', compact('collections'));
     }
@@ -34,7 +36,8 @@ class CollectionController extends Controller
             'name' => 'required'
         ]);
 
-        Collection::create($validated);
+        $collection = Collection::create($validated);
+        $collection->user()->associate(Auth::user())->save();
 
         return redirect()->route('collections.index');
         
