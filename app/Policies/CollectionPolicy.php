@@ -27,9 +27,9 @@ class CollectionPolicy
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user): bool
+    public function createLink(User $user, Collection $collection): bool
     {
-        return false;
+        return $this->update($user, $collection);
     }
 
     /**

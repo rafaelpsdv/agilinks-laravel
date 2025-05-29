@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class CollectionController extends Controller
 {
@@ -56,6 +57,8 @@ class CollectionController extends Controller
      */
     public function edit(Collection $collection)
     {
+        Gate::authorize('update', $collection);
+
         return view('collections.edit', compact('collection'));
     }
 
@@ -64,6 +67,8 @@ class CollectionController extends Controller
      */
     public function update(Request $request, Collection $collection)
     {
+        Gate::authorize('update', $collection);
+
         $validated = $request->validate([
             'name' => 'required'
         ]);
@@ -79,6 +84,8 @@ class CollectionController extends Controller
      */
     public function destroy(Collection $collection)
     {
+        Gate::authorize('delete', $collection);
+
         $collection->delete();
 
         return redirect()->route('collections.index');

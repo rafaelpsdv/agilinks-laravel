@@ -25,7 +25,7 @@ class LinkController extends Controller
      */
     public function create()
     {
-        $collections = Collection::all();
+        $collections = Auth::user()->collections()->get();
         
         return view('links.create', compact('collections'));
     }
@@ -43,9 +43,10 @@ class LinkController extends Controller
         ]);
 
         $collection = Collection::findOrFail($request->collection_id);
+        Gate::authorize('createLink', $collection);
+
         $link = Link::create($validated);
         $link->collection()->associate($collection)->save();
-        
         $link->user()->associate(Auth::user())->save();
 
         return redirect()->route('links.index');
