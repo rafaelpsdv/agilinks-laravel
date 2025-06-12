@@ -18,6 +18,6 @@ class UserController extends Controller
             abort(404);
         }
 
-        return view('user.view', compact($user));
+        return view('user.view', compact('user'));
     }
 }
