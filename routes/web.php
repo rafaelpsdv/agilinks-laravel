@@ -3,6 +3,7 @@
 use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\LinkController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,5 +19,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('links', LinkController::class);
     Route::resource('collections', CollectionController::class);
 });
+
+
+// this route must to be the last because there is a precedence order.
+Route::get('/{user}', UserController::class);
 
 require __DIR__.'/auth.php';
